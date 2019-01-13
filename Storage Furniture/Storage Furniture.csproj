@@ -46,6 +46,7 @@
     <Compile Include="Adress.cs" />
     <Compile Include="Armchair.cs" />
     <Compile Include="Bed.cs" />
+    <Compile Include="Category.cs" />
     <Compile Include="Chair.cs" />
     <Compile Include="Cupboard.cs" />
     <Compile Include="Furniture.cs" />

@@ -11,7 +11,7 @@ namespace Storage_Furniture
     {
         static void Main(string[] args)
         {
-            /*
+
             Adress adress = new Adress("Украина", "Днепр", "Кирова", "46");
 
             Table table = new Table("барный", "квадратный", 1.5, 1.3, "дсп + дерево", "дсп", "белый", "IKEA", "Польша", 1450);
@@ -39,9 +39,8 @@ namespace Storage_Furniture
 
             Storage storage = new Storage(adress);
             AddFurnitureInStorage(storage, table, table2, table3, chair, chair2, chair3, chair4, armchair, armchair2, sofa, sofa2, sofa3, bed, bed2, bed3, cupboard, cupboard2);
-            */
-                       
-            Menu();
+
+            //Menu();
         }
 
         static void AddFurnitureInStorage(Storage storage, params Furniture[] furnitures)
@@ -55,7 +54,7 @@ namespace Storage_Furniture
             Console.WriteLine("Введите адрес склада:");
             Storage storage = new Storage(CreateAdress());
             Console.Clear();
-            int action, choice;
+            int action, choice, idx;
             double price;
 
             do
@@ -94,7 +93,7 @@ namespace Storage_Furniture
                     else
                         Console.WriteLine("Error!!!");
                 }
-                else if(action == 2)
+                else if (action == 2)
                 {
                     Console.WriteLine("Какой вид мебели вы хотите удалить?\n[1] стол\n[2] стул\n[3] кресло\n[4] диван\n[5] кровать\n[6] шкаф");
                     int.TryParse(Console.ReadLine(), out choice);
@@ -115,7 +114,7 @@ namespace Storage_Furniture
                     else
                         Console.WriteLine("Мебели с такими характеристиками в базе не существует!");
                 }
-                else if(action == 3)
+                else if (action == 3)
                 {
                     Console.WriteLine("Информацию о каком виде мебели вы хотите посмотреть?\n[1] стол\n[2] стул\n[3] кресло\n[4] диван\n[5] кровать\n[6] шкаф");
                     int.TryParse(Console.ReadLine(), out choice);
@@ -124,98 +123,99 @@ namespace Storage_Furniture
                     int.TryParse(Console.ReadLine(), out idx);
 
                     if (choice == 1)
-                        Console.WriteLine(storage.GetInfoByIndex(new Table(), idx));
+                        Console.WriteLine(storage.GetInfoByIndex(typeof(Table), idx));
                     else if (choice == 2)
-                        Console.WriteLine(storage.GetInfoByIndex(new Сhair(), idx));
+                        Console.WriteLine(storage.GetInfoByIndex(typeof(Сhair), idx));
                     else if (choice == 3)
-                        Console.WriteLine(storage.GetInfoByIndex(new Armchair(), idx));
+                        Console.WriteLine(storage.GetInfoByIndex(typeof(Armchair), idx));
                     else if (choice == 4)
-                        Console.WriteLine(storage.GetInfoByIndex(new Sofa(), idx));
+                        Console.WriteLine(storage.GetInfoByIndex(typeof(Sofa), idx));
                     else if (choice == 5)
-                        Console.WriteLine(storage.GetInfoByIndex(new Bed(), idx));
+                        Console.WriteLine(storage.GetInfoByIndex(typeof(Bed), idx));
                     else if (choice == 6)
-                        Console.WriteLine(storage.GetInfoByIndex(new Cupboard(), idx));
+                        Console.WriteLine(storage.GetInfoByIndex(typeof(Cupboard), idx));
                     else
                         Console.WriteLine("Мебели данного типа в базе не существует!");
                     Thread.Sleep(3000);
                 }
-                else if(action == 4)
+                else if (action == 4)
                 {
                     Console.WriteLine("Информацию какой категории мебели вы хотите посмотреть?\n[1] стол\n[2] стул\n[3] кресло\n[4] диван\n[5] кровать\n[6] шкаф");
                     int.TryParse(Console.ReadLine(), out choice);
 
                     if (choice == 1)
-                        Console.WriteLine(storage.GetInfoAboutAllCategoryOf(new Table().GetType()));
+                        Console.WriteLine(storage.GetInfoAboutAllCategoryOf(typeof(Table)));
                     else if (choice == 2)
-                        Console.WriteLine(storage.GetInfoAboutAllCategoryOf(new Сhair().GetType()));
+                        Console.WriteLine(storage.GetInfoAboutAllCategoryOf(typeof(Сhair)));
                     else if (choice == 3)
-                        Console.WriteLine(storage.GetInfoAboutAllCategoryOf(new Armchair().GetType()));
+                        Console.WriteLine(storage.GetInfoAboutAllCategoryOf(typeof(Armchair)));
                     else if (choice == 4)
-                        Console.WriteLine(storage.GetInfoAboutAllCategoryOf(new Sofa().GetType()));
+                        Console.WriteLine(storage.GetInfoAboutAllCategoryOf(typeof(Sofa)));
                     else if (choice == 5)
-                        Console.WriteLine(storage.GetInfoAboutAllCategoryOf(new Bed().GetType()));
+                        Console.WriteLine(storage.GetInfoAboutAllCategoryOf(typeof(Bed)));
                     else if (choice == 6)
-                        Console.WriteLine(storage.GetInfoAboutAllCategoryOf(new Cupboard().GetType()));
+                        Console.WriteLine(storage.GetInfoAboutAllCategoryOf(typeof(Cupboard)));
                     else
                         Console.WriteLine("Мебели данного типа в базе не существует!");
                     Thread.Sleep(3000);
                 }
-                else if(action == 5)
+                else if (action == 5)
                 {
                     Console.WriteLine("В какой категории мебели вы хотите изменить цену?\n[1] стол\n[2] стул\n[3] кресло\n[4] диван\n[5] кровать\n[6] шкаф");
                     int.TryParse(Console.ReadLine(), out choice);
+                    Console.Write("Введите индекс товара: ");
+                    int.TryParse(Console.ReadLine(), out idx);
                     Console.Write("\nВведите новую цену: ");
                     double.TryParse(Console.ReadLine(), out price);
-                    Console.WriteLine("Введите текущие данные мебели: ");
 
                     if (choice == 1)
-                        storage.ChangePrice(CreateTable(), price);
+                        storage.ChangePrice(typeof(Table), idx, price);
                     else if (choice == 2)
-                        storage.RemoveFurniture(CreateChair());
+                        storage.ChangePrice(typeof(Сhair), idx, price);
                     else if (choice == 3)
-                        storage.RemoveFurniture(CreateArmchair());
+                        storage.ChangePrice(typeof(Armchair), idx, price);
                     else if (choice == 4)
-                        storage.RemoveFurniture(CreateSofa());
+                        storage.ChangePrice(typeof(Sofa), idx, price);
                     else if (choice == 5)
-                        storage.RemoveFurniture(CreateBed());
+                        storage.ChangePrice(typeof(Bed), idx, price);
                     else if (choice == 6)
-                        storage.RemoveFurniture(CreateCupboard());
+                        storage.ChangePrice(typeof(Armchair), idx, price);
                     else
                         Console.WriteLine("Мебели с такими характеристиками в базе не существует!");
                     Thread.Sleep(1500);
                 }
-                else if(action == 6)
+                else if (action == 6)
                 {
                     Console.WriteLine("* * * * * СКЛАД МЕБЕЛИ * * * * *\n{0}", storage.GetInfoAllStorage());
                     Thread.Sleep(4000);
                 }
-                else if(action == 7)
+                else if (action == 7)
                 {
                     Console.WriteLine("Количество товаров нa сладе: {0}", storage.GetCountAllFurniture());
                     Thread.Sleep(2000);
                 }
-                else if(action == 8)
+                else if (action == 8)
                 {
                     Console.WriteLine("Выберите категорию:\n[1] стол\n[2] стул\n[3] кресло\n[4] диван\n[5] кровать\n[6] шкаф");
                     int.TryParse(Console.ReadLine(), out choice);
 
                     if (choice == 1)
-                        Console.WriteLine("Количество товаров категории \"Стол\" = {0}", storage.GetCountFurnitureOfType(new Table().GetType()));
+                        Console.WriteLine("Количество товаров категории \"Стол\" = {0}", storage.GetCountFurnitureOfType(typeof(Table)));
                     else if (choice == 2)
-                        Console.WriteLine("Количество товаров категории \"Стул\" = {0}", storage.GetCountFurnitureOfType(new Сhair().GetType()));
+                        Console.WriteLine("Количество товаров категории \"Стул\" = {0}", storage.GetCountFurnitureOfType(typeof(Сhair)));
                     else if (choice == 3)
-                        Console.WriteLine("Количество товаров категории \"Кресло\" = {0}", storage.GetCountFurnitureOfType(new Armchair().GetType()));
+                        Console.WriteLine("Количество товаров категории \"Кресло\" = {0}", storage.GetCountFurnitureOfType(typeof(Armchair)));
                     else if (choice == 4)
-                        Console.WriteLine("Количество товаров категории \"Диван\" = {0}", storage.GetCountFurnitureOfType(new Sofa().GetType()));
+                        Console.WriteLine("Количество товаров категории \"Диван\" = {0}", storage.GetCountFurnitureOfType(typeof(Sofa)));
                     else if (choice == 5)
-                        Console.WriteLine("Количество товаров категории \"Кровать\" = {0}", storage.GetCountFurnitureOfType(new Bed().GetType()));
+                        Console.WriteLine("Количество товаров категории \"Кровать\" = {0}", storage.GetCountFurnitureOfType(typeof(Bed)));
                     else if (choice == 6)
-                        Console.WriteLine("Количество товаров категории \"Шкаф\" = {0}", storage.GetCountFurnitureOfType(new Cupboard().GetType()));
+                        Console.WriteLine("Количество товаров категории \"Шкаф\" = {0}", storage.GetCountFurnitureOfType(typeof(Cupboard)));
                     else
                         Console.WriteLine("Error!!!");
                     Thread.Sleep(2000);
                 }
-                else if(action == 9)
+                else if (action == 9)
                 {
                     Console.WriteLine("Адрес склада:\n{0}", storage.GetAdress());
                     Thread.Sleep(2000);
@@ -224,7 +224,7 @@ namespace Storage_Furniture
                 {
                     Environment.Exit(0);
                 }
-                Console.Clear();                 
+                Console.Clear();
             } while (action != 0);
         }
 
@@ -273,11 +273,11 @@ namespace Storage_Furniture
             Console.Write("Цена: ");
             double.TryParse(Console.ReadLine(), out val);
             table.Price = val;
-            return table;           
+            return table;
         }
 
         static Сhair CreateChair()
-        {    
+        {
             Сhair chair = new Сhair();
             double val;
             Console.Write("\nТип стула (скамья, табурет, стул): ");
